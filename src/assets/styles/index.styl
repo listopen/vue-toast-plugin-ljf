@@ -1,0 +1,27 @@
+@import "./mixins.styl";
+.picker
+  position relative
+  .select
+    width 750px
+    height 350px
+    border-top 1px solid #333
+    border-bottom 1px solid #333
+    overflow scroll
+    .content-main
+      width 325px
+      height 350px
+      background gray
+      margin 0 auto
+  .value
+    position absolute
+    z-index 2
+    top 50%
+    transform translateY(-50%)
+    height 100px
+    width 100%
+    border-top 1px solid red
+    border-bottom 1px solid red
+  .demo
+    height 100px
+    background red
+  

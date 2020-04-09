@@ -1,8 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <list-items 
-      v-if="false"
+    <div class="picker">
+      <div class="value"></div>
+      <div class="select" @scroll="onScroll">
+        <div class="content-main"></div>
+        <div class="demo"></div>
+        <div class="content-main"></div>
+      </div>
+    </div>
+    
+    <list-items
+      v-if="false" 
       title="text"
       type='text' 
       maxlength="11" 
@@ -10,13 +19,14 @@
       v-model="val"
     >
     </list-items>
-    <dateItems></dateItems>
+    <dateItems v-if="false"></dateItems>
   </div> 
 </template>
 
 <script>
 import listItems from './components/list-items.vue'
 import dateItems from './components/date-items.vue'
+import './assets/styles/index.styl'
 export default {
   name: 'App',
   data() {
@@ -30,6 +40,9 @@ export default {
     }
   },
   methods: {
+    onScroll(e) {
+      console.log(e)
+    },
     input123(val) {
       console.log('==> ', val)
     }
@@ -41,11 +54,7 @@ export default {
 }
 </script>
 
-<style>
-input{
-  color: red !important;
-  background: #fff;
-}
+<style lang="stylus">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

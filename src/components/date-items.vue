@@ -6,22 +6,25 @@
     <div style="font-size:20px;font-weight:600;">{{r}}</div>
     <div class="date-list">
       <ul class="wrap">
-      <li class="title">日</li>
-      <li class="title">一</li>
-      <li class="title">二</li>
-      <li class="title">三</li>
-      <li class="title">四</li>
-      <li class="title">五</li>
-      <li class="title">六</li>
-      <li 
-        :class="{'blue': item === number}"
-        v-for="(item,key) in month" 
-        :key="key"
-        @click="number = item"
-      >
-        {{item}}
-      </li>
-    </ul>
+        <li class="title">日</li>
+        <li class="title">一</li>
+        <li class="title">二</li>
+        <li class="title">三</li>
+        <li class="title">四</li>
+        <li class="title">五</li>
+        <li class="title">六</li>
+        <li 
+          :class="{'blue': item === toDay}"
+          v-for="(item,key) in month" 
+          :key="key"
+          @click="number = item, day = item"
+        >
+          {{item}}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <button @click="confirm">Confirm Month</button>
     </div>
   </div>
 </template>
@@ -55,7 +58,9 @@ export default {
       dates: [],
       month: [],
       number: '',
-      r: ''
+      r: 1,
+      day: '',
+      toDay: new Date().getDate()
     }
   },
   created() {
@@ -107,17 +112,27 @@ export default {
       
     },
     changeMonth() {
-      let r = Math.floor(Math.random()*12+1)
-      this.r = r
-      this.month = this.dates['2020'][r]
-      console.log(r, this.month)
+      // let r = Math.floor(Math.random()*12+1)
+      this.r ++
+      if(this.r > 12) {
+        this.r = 1
+      }
+      this.month = this.dates['2020'][this.r]
+      console.log(this.r, this.month)
+    },
+    confirm() {
+      if(!this.day) {
+        alert(`请选择日期`)
+        return 
+      }
+      alert(`${this.r}月${this.day}日`)
     }
   }
 }
 </script>
 <style scoped>
   .date-list{
-    width: 274px;
+    width: 750px;
     /* height: 174px; */
     border: 1px solid #333;
     border-radius: 3px;
@@ -139,10 +154,16 @@ export default {
     font-size: 18px;
     font-weight: 600;
   }
+  .date-list li{
+    border-radius: 50%;
+  }
   .date-list li.blue{
     color: #fff;
     background: rgb(46, 96, 235);
-    border-radius: 2px;
+  }
+  .date-list li.gray{
+    color: #fff;
+    background: rgb(192, 192, 192);
   }
   
 </style>
